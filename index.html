@@ -616,12 +616,17 @@
         function handleEnter(e) { if(e.key==='Enter') window.location.href="https://www.google.com/search?q="+encodeURIComponent(e.target.value); }
         
         window.oncontextmenu = function(e) { e.preventDefault(); const m=document.getElementById('ctx-menu'); m.style.display='flex'; m.style.left=(mouseEnabled?cursorX:e.clientX)+'px'; m.style.top=(mouseEnabled?cursorY:e.clientY)+'px'; };
-        window.onclick = function(e) { 
+                window.onclick = function(e) {
             if(!e.target.closest('.menu-btn')) document.getElementById('browser-menu').style.display='none';
-            document.getElementById('ctx-menu').style.display='none'; 
+            document.getElementById('ctx-menu').style.display='none';
             if(!e.target.closest('#clock') && !e.target.closest('#calendar-popup')) document.getElementById('calendar-popup').style.display='none';
         };
+
         function hideCtx() { document.getElementById('ctx-menu').style.display='none'; }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js');
+        }
     </script>
 </body>
 </html>
